@@ -36,10 +36,45 @@ body {
     transition: 0.5s;
 }
 
+input {
+    appearance: none;
+
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+
+    transition: 0.2s all linear;
+    margin-right: 12px;
+
+    position: relative;
+    top: 4px;
+}
+
+input:last-child {
+    margin-right: 0;
+}
+input:checked {
+    transform: scale(1.2);
+}
+
+#easy {
+    background-color: limegreen;
+    border: 2px solid green;
+}
+
+#normal {
+    background-color: rgb(255, 207, 117);
+    border: 2px solid orange;
+}
+
+#hard {
+    background-color: rgb(252, 119, 119);
+    border: 2px solid red;
+}
+
 #repeat {
     font-size: 5rem;
-    color: orange;
-    -webkit-text-stroke: 3px darkblue;
+    color: darkblue;
 }
 #repeat:active {
     transform: scale(0.9);
