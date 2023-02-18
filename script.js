@@ -4,7 +4,6 @@ const field3 = document.querySelector('#field3');
 const fieldsArray = [field1, field2, field3];
 let solution = fieldsArray[Math.floor(Math.random()*fieldsArray.length)].textContent;
 
-
 const winSound = new Audio('./resources/Glass.m4a');
 const loseSound = new Audio('./resources/Basso.m4a');
 const cijfer0 = new Audio('./resources/cijfers_nul.mp3');
@@ -83,7 +82,7 @@ fieldsArray.forEach((field) => {
     function showSolution() {
         fieldsArray.forEach((field) => {
             if (field.textContent === solution) {
-                field.style.backgroundColor = 'limeGreen';
+                field.style.backgroundColor = 'limegreen';
                 field.style.transform = 'scale(1.1)';
             } else {
                 field.style.backgroundColor = 'red';
