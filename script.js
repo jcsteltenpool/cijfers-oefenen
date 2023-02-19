@@ -14,7 +14,6 @@ gameMode.addEventListener('change', () => {
     const data = new FormData(gameMode);
     for (const [name, value] of data) {
         output = `${value}`;
-        console.log(output);
         startNewGame();
     }
 })
@@ -32,6 +31,7 @@ function startNewGame() {
             break;
     }   
 }
+
 function createGame(main, sec) {
     fieldsArray.forEach((field) => {
         field.textContent = getRandomNumber(main);
