@@ -4,19 +4,6 @@ const field3 = document.querySelector('#field3');
 const fieldsArray = [field1, field2, field3];
 let solution = fieldsArray[Math.floor(Math.random()*fieldsArray.length)].textContent;
 
-const winSound = new Audio('./resources/Glass.m4a');
-const loseSound = new Audio('./resources/Basso.m4a');
-const cijfer0 = new Audio('./resources/cijfers_nul.mp3');
-const cijfer1 = new Audio('./resources/cijfers_een.mp3');
-const cijfer2 = new Audio('./resources/cijfers_twee.mp3');
-const cijfer3 = new Audio('./resources/cijfers_drie.mp3');
-const cijfer4 = new Audio('./resources/cijfers_vier.mp3');
-const cijfer5 = new Audio('./resources/cijfers_vijf.mp3');
-const cijfer6 = new Audio('./resources/cijfers_zes.mp3');
-const cijfer7 = new Audio('./resources/cijfers_zeven.mp3');
-const cijfer8 = new Audio('./resources/cijfers_acht.mp3');
-const cijfer9 = new Audio('./resources/cijfers_negen.mp3');
-
 const gameMode = document.querySelector('#gameMode');
 let output = 'easy';
 
@@ -105,8 +92,10 @@ fieldsArray.forEach((field) => {
 
     function playWinOrLoseSound() {
         if (field.textContent === solution) {
+            const winSound = new Audio('./resources/Glass.m4a');
             winSound.play();
         } else {
+            const loseSound = new Audio('./resources/Basso.m4a');
             loseSound.play();
         }
     };
@@ -125,33 +114,43 @@ fieldsArray.forEach((field) => {
 function playSolution() {
     switch (solution) {
         case '0':
+            const cijfer0 = new Audio('./resources/cijfers_nul.mp3');
             cijfer0.play();
             break;
         case '1':
+            const cijfer1 = new Audio('./resources/cijfers_een.mp3');
             cijfer1.play();
             break;
         case '2':
+            const cijfer2 = new Audio('./resources/cijfers_twee.mp3');
             cijfer2.play();
             break;
         case '3':
+            const cijfer3 = new Audio('./resources/cijfers_drie.mp3');
             cijfer3.play();
             break;
         case '4':
+            const cijfer4 = new Audio('./resources/cijfers_vier.mp3');
             cijfer4.play();
             break;
         case '5':
+            const cijfer5 = new Audio('./resources/cijfers_vijf.mp3');
             cijfer5.play();
             break;
         case '6':
+            const cijfer6 = new Audio('./resources/cijfers_zes.mp3');
             cijfer6.play();
             break;
         case '7':
+            const cijfer7 = new Audio('./resources/cijfers_zeven.mp3');
             cijfer7.play();
             break;
         case '8':
+            const cijfer8 = new Audio('./resources/cijfers_acht.mp3');
             cijfer8.play();
             break;
         case '9':
+            const cijfer9 = new Audio('./resources/cijfers_negen.mp3');
             cijfer9.play();
             break;
     }
