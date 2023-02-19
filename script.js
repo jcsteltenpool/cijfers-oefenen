@@ -3,7 +3,6 @@ const field2 = document.querySelector('#field2');
 const field3 = document.querySelector('#field3');
 const fieldsArray = [field1, field2, field3];
 let solution = fieldsArray[Math.floor(Math.random()*fieldsArray.length)].textContent;
-let randomField;
 
 const winSound = new Audio('./resources/Glass.m4a');
 const loseSound = new Audio('./resources/Basso.m4a');
@@ -18,110 +17,67 @@ const cijfer7 = new Audio('./resources/cijfers_zeven.mp3');
 const cijfer8 = new Audio('./resources/cijfers_acht.mp3');
 const cijfer9 = new Audio('./resources/cijfers_negen.mp3');
 
+const gameMode = document.querySelector('#gameMode');
+let output = 'easy';
+
 const repeatButton = document.querySelector('#repeat');
 repeatButton.addEventListener('click', playSolution);
 
-function createGame() {
-
-
-}
-// switch in global scope? / createGame() leest waarde van inputs oid
-
-const gameMode = document.querySelector('#gameMode');
 gameMode.addEventListener('change', () => {
     const data = new FormData(gameMode);
-    let output = "";
     for (const [name, value] of data) {
         output = `${value}`;
         console.log(output);
-    }
-    switch (output) {
-        case 'easy':
-            createEasyGame();
-            break;
-        case 'normal':
-            createNormalGame();
-            break;   
-        case 'hard':
-            createHardGame();
-            break;
+        startNewGame();
     }
 })
 
-function getRandomEasyNumber() {
-    const easyArray = [0, 1, 2, 3, 4, 5];
-    let easyNumber = easyArray[Math.floor(Math.random()*easyArray.length)];
-    return easyNumber;
+function startNewGame() {
+    switch (output) {
+        case 'easy':
+            createGame('easy', 'hard');
+            break;
+        case 'normal':
+            createGame('hard', 'easy');
+            break;   
+        case 'hard':
+            createGame('hard', 'hard');
+            break;
+    }   
 }
-
-function getRandomHardNumber() {
-    const hardArray = [6, 7, 8, 9];
-    let hardNumber = hardArray[Math.floor(Math.random()*hardArray.length)];
-    return hardNumber;
-}
-
-
-function createEasyGame() {
+function createGame(main, sec) {
     fieldsArray.forEach((field) => {
-        field.textContent = getRandomEasyNumber();
-    })
-
+        field.textContent = getRandomNumber(main);
+    });
     while(field2.textContent === field1.textContent) {
-        field2.textContent = getRandomEasyNumber();
+        field2.textContent = getRandomNumber(main);
     }
     while(field3.textContent === field1.textContent || field3.textContent === field2.textContent) {
-        field3.textContent = getRandomEasyNumber();
+        field3.textContent = getRandomNumber(main);
     }
-
-    randomField = fieldsArray[Math.floor(Math.random()*fieldsArray.length)];
-    randomField.textContent = getRandomHardNumber();
-
+        
+    let randomField = fieldsArray[Math.floor(Math.random()*fieldsArray.length)];
+    randomField.textContent = getRandomNumber(sec);
+    while(field1.textContent === field2.textContent || field1.textContent === field3.textContent || field2.textContent === field3.textContent) {
+        randomField.textContent = getRandomNumber(sec);
+    }
+        
     pickNumToCall();
-
     setTimeout(() => {
         playSolution();
     },500);
 }
 
-function createNormalGame() {
-    fieldsArray.forEach((field) => {
-        field.textContent = getRandomHardNumber();
-    })
-
-    while(field2.textContent === field1.textContent) {
-        field2.textContent = getRandomHardNumber();
+function getRandomNumber(level) {
+    if (level === 'easy') {
+        const easyArray = [0, 1, 2, 3, 4, 5];
+        let easyNumber = easyArray[Math.floor(Math.random()*easyArray.length)];
+        return easyNumber;
+    } else if (level === 'hard') {
+        const hardArray = [6, 7, 8, 9];
+        let hardNumber = hardArray[Math.floor(Math.random()*hardArray.length)];
+        return hardNumber;
     }
-    while(field3.textContent === field1.textContent || field3.textContent === field2.textContent) {
-        field3.textContent = getRandomHardNumber();
-    }
-
-    randomField = fieldsArray[Math.floor(Math.random()*fieldsArray.length)];
-    randomField.textContent = getRandomEasyNumber();
-
-    pickNumToCall();
-
-    setTimeout(() => {
-        playSolution();
-    },500);
-}
-
-function createHardGame() {
-    fieldsArray.forEach((field) => {
-        field.textContent = getRandomHardNumber();
-    })
-
-    while(field2.textContent === field1.textContent) {
-        field2.textContent = getRandomHardNumber();
-    }
-    while(field3.textContent === field1.textContent || field3.textContent === field2.textContent) {
-        field3.textContent = getRandomHardNumber();
-    }
-
-    pickNumToCall();
-
-    setTimeout(() => {
-        playSolution();
-    },500);
 }
 
 function pickNumToCall() {
@@ -149,7 +105,6 @@ fieldsArray.forEach((field) => {
 
     function playWinOrLoseSound() {
         if (field.textContent === solution) {
-            console.log('Win');
             winSound.play();
         } else {
             loseSound.play();
@@ -162,7 +117,7 @@ fieldsArray.forEach((field) => {
                 field.style.backgroundColor = 'skyblue';
                 field.style.transform = 'scale(1)';
             })
-            createGame();
+            startNewGame();
         }, 2000);
     }
 });
@@ -202,7 +157,5 @@ function playSolution() {
     }
 };
 
-createEasyGame();
-
-
+startNewGame();
 
