@@ -4,22 +4,22 @@ const field3 = document.querySelector('#field3');
 const fieldsArray = [field1, field2, field3];
 let solution = fieldsArray[Math.floor(Math.random()*fieldsArray.length)].textContent;
 
-const gameMode = document.querySelector('#gameMode');
-let output = 'easy';
+const gameModeSwitch = document.querySelector('#gameMode');
+let gameModeValue = 'easy';
 
 const repeatButton = document.querySelector('#repeat');
 repeatButton.addEventListener('click', playSolution);
 
-gameMode.addEventListener('change', () => {
-    const data = new FormData(gameMode);
+gameModeSwitch.addEventListener('change', () => {
+    const data = new FormData(gameModeSwitch);
     for (const [name, value] of data) {
-        output = `${value}`;
+        gameModeValue = `${value}`;
         startNewGame();
     }
 })
 
 function startNewGame() {
-    switch (output) {
+    switch (gameModeValue) {
         case 'easy':
             createGame('easy', 'hard');
             break;
