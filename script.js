@@ -50,9 +50,7 @@ function createGame(main, sec) {
     }
         
     pickNumToCall();
-    setTimeout(() => {
-        playSolution();
-    },500);
+    setTimeout(playSolution, 500);
 }
 
 function getRandomNumber(level) {
@@ -101,13 +99,15 @@ fieldsArray.forEach((field) => {
     };
 
     function reloadGame() {
-        setTimeout(() => {
-            fieldsArray.forEach((field) => {
-                field.style.backgroundColor = 'skyblue';
-                field.style.transform = 'scale(1)';
-            })
-            startNewGame();
-        }, 2000);
+        setTimeout(startNewGame, 2000);
+        setTimeout(resetFields, 2000);
+    }
+
+    function resetFields() {
+        fieldsArray.forEach((field) => {
+            field.style.backgroundColor = 'skyblue';
+            field.style.transform = 'scale(1)';
+        })
     }
 });
 
