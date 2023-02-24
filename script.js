@@ -50,7 +50,7 @@ function createGame(main, sec) {
     }
         
     pickNumToCall();
-    setTimeout(playSolution, 500);
+    playSolution();
 }
 
 function getRandomNumber(level) {
@@ -68,48 +68,6 @@ function getRandomNumber(level) {
 function pickNumToCall() {
     solution = fieldsArray[Math.floor(Math.random()*fieldsArray.length)].textContent;
 };
-
-fieldsArray.forEach((field) => {
-    field.addEventListener('click', () => {
-        showSolution();
-        playWinOrLoseSound();
-        reloadGame();
-    });
-
-    function showSolution() {
-        fieldsArray.forEach((field) => {
-            if (field.textContent === solution) {
-                field.style.backgroundColor = 'limegreen';
-                field.style.transform = 'scale(1.1)';
-            } else {
-                field.style.backgroundColor = 'red';
-                field.style.transform = 'scale(0.95)';
-            }
-        })
-    };
-
-    function playWinOrLoseSound() {
-        if (field.textContent === solution) {
-            const winSound = new Audio('./resources/Glass.m4a');
-            winSound.play();
-        } else {
-            const loseSound = new Audio('./resources/Basso.m4a');
-            loseSound.play();
-        }
-    };
-
-    function reloadGame() {
-        setTimeout(startNewGame, 2000);
-        setTimeout(resetFields, 2000);
-    }
-
-    function resetFields() {
-        fieldsArray.forEach((field) => {
-            field.style.backgroundColor = 'skyblue';
-            field.style.transform = 'scale(1)';
-        })
-    }
-});
 
 function playSolution() {
     switch (solution) {
@@ -155,6 +113,47 @@ function playSolution() {
             break;
     }
 };
+
+fieldsArray.forEach((field) => {
+    field.addEventListener('click', () => {
+        showSolution();
+        playWinOrLoseSound();
+        reloadGame();
+    });
+
+    function showSolution() {
+        fieldsArray.forEach((field) => {
+            if (field.textContent === solution) {
+                field.style.backgroundColor = 'limegreen';
+                field.style.transform = 'scale(1.1)';
+            } else {
+                field.style.backgroundColor = 'red';
+                field.style.transform = 'scale(0.95)';
+            }
+        })
+    };
+
+    function playWinOrLoseSound() {
+        if (field.textContent === solution) {
+            const winSound = new Audio('./resources/Glass.m4a');
+            winSound.play();
+        } else {
+            const loseSound = new Audio('./resources/Basso.m4a');
+            loseSound.play();
+        }
+    };
+
+    function reloadGame() {
+        setTimeout(() => {startNewGame(); resetFields()}, 2000);
+    }
+
+    function resetFields() {
+        fieldsArray.forEach((field) => {
+            field.style.backgroundColor = 'skyblue';
+            field.style.transform = 'scale(1)';
+        })
+    }
+});
 
 startNewGame();
 
