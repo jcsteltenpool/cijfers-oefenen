@@ -157,3 +157,5 @@ fieldsArray.forEach((field) => {
 
 startNewGame();
 
+// Testing commit
+
